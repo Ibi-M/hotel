@@ -157,3 +157,55 @@ while True:
 print("\n--- Booking Summary ---")
 for booking in customer_bookings:
     print(f"Name: {booking['name']}, Room: {booking['room_type']}, Adults: {booking['adults']}, Children: {booking['children']}, Price: £{booking['total_price']}")
+
+
+print("Hello, and Welcome to the Sigma Industry Hotel\n")
+
+# Room types and availability
+room_types = ["Single", "Double", "Apartment", "Suite"]
+room_counts = [5, 5, 4, 2]  # Number of available rooms for each type
+room_prices = [400, 300, 600, 1000]  # Per adult pricing
+child_prices = [0, 0, 500, 800]  # Only applies to apartments and suites
+
+while True:
+    name = input("\nEnter your name: ")
+    adults = int(input("Enter number of adults: "))
+    children = int(input("Enter number of children: "))
+    total_people = adults + children
+
+    # Select room type
+    if total_people == 1:
+        room_index = 0  # Single
+    elif total_people == 2:
+        room_index = 1  # Double
+    elif 3 <= total_people <= 4:
+        room_index = 2  # Apartment
+    elif 5 <= total_people <= 6:
+        room_index = 3  # Suite
+    else:
+        print("We can only accommodate up to 6 people per booking.\n")
+        continue
+
+    # Check room availability
+    if room_counts[room_index] > 0:
+        room_counts[room_index] -= 1  # Reduce available rooms
+
+        # Calculate price
+        total_price = (adults * room_prices[room_index]) + (children * child_prices[room_index])
+
+        # Print receipt
+        print("\n--- Booking Receipt ---")
+        print(f"Customer Name: {name}")
+        print(f"Room Type: {room_types[room_index]}")
+        print(f"Number of Adults: {adults}")
+        print(f"Number of Children: {children}")
+        print(f"Total Price: £{total_price}")
+        print("----------------------\n")
+
+    else:
+        print(f"Sorry, {room_types[room_index]} is fully booked.\n")
+
+    # Continue booking?
+    more = input("Do you want to book another room? (yes/no): ").lower()
+    if more != "yes":
+        break
