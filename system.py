@@ -38,7 +38,8 @@ if adults + child == 3:
     print("Which room do you want to book?")
     print("- Deluxe Double")
     print("- Signature Apartment")
-    chosen = apartment
+    print("")
+    chosen = input("Enter choice: ")
 
 
            
